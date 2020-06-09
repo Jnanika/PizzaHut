@@ -31,6 +31,7 @@ public class JoinPizzaTest {
 
         driver.findElement(By.id("ph-sign-in")).click();
         WebElement email = driver.findElement(By.id("email_signIn"));
+        Thread.sleep(5000);
         WebElement password = driver.findElement(By.name("password"));
 
         Xls_Reader reader = new Xls_Reader("c:\\data\\pizzahut.xlsx");
@@ -57,6 +58,8 @@ public class JoinPizzaTest {
 
             email.clear();
             email.sendKeys(eId);
+            
+          
 
             password.clear();
             password.sendKeys(pass);
