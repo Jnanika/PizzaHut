@@ -42,6 +42,7 @@ public class LogoTest {
         driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         driver.manage().window().maximize();
+        driver.get("https://www.pizzahut.com/index.php#/home");
 
     }
 
@@ -54,11 +55,19 @@ public class LogoTest {
     @Test
 
     public void LogoVisibleTest() {
-        driver.get("https://www.pizzahut.com/index.php#/home");
-
+        
+        
         boolean logoEnable = driver.findElement(By.id("ph-logo-small")).isEnabled();
         boolean logoPresent = driver.findElement(By.id("ph-logo-small")).isDisplayed();
+        assertTrue("Pizza Hut logo", logoPresent);
+        
+        
         System.out.println("logo is prsent");
+        
+        
+        
+ 
 
+        
     }
 }
