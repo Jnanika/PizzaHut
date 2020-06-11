@@ -20,12 +20,12 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 public class ExcelFileUtil {
 
-    public static Deal getDealData() {
-        Deal deal = null;
+    public static CustomerDetailsVO getDealData() {
+        CustomerDetailsVO deal = null;
 
         try {
             //read excel file
-            FileInputStream inputStream = new FileInputStream(new File("c:\\data\\Deal1.xlsx"));
+            FileInputStream inputStream = new FileInputStream(new File("c:\\data\\CustomerDetails.xlsx"));
         
             Workbook workbook = new XSSFWorkbook(inputStream);
             //getting first worksheet
@@ -46,10 +46,23 @@ public class ExcelFileUtil {
 
             c = r.getCell(4);
             long phonenumber = (long) c.getNumericCellValue();
-
+            
             c = r.getCell(5);
             int extension = (int) c.getNumericCellValue();
-            deal = new Deal(zipcode, firstname, lastname, emailaddress, phonenumber, extension);
+            
+             c = r.getCell(6);
+            String address1 = (String) c.getStringCellValue();
+            
+            c = r.getCell(7);
+            String address2 = (String) c.getStringCellValue();
+            
+            c = r.getCell(8);
+            String city = (String) c.getStringCellValue();
+            
+            c = r.getCell(9);
+            String state = (String) c.getStringCellValue();
+            
+            deal = new CustomerDetailsVO(zipcode, firstname, lastname, emailaddress, phonenumber, extension,address1,address2,city,state);
             System.out.println(deal);
             inputStream.close();
         } catch (IOException e) {

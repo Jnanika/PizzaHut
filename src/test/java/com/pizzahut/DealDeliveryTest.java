@@ -20,15 +20,16 @@ import org.openqa.selenium.chrome.ChromeDriver;
  *
  * @author manju
  */
-public class DealModuleb412Test {
-    private static CustomerDetailsVO deal=null;
+public class DealDeliveryTest {
+     private static CustomerDetailsVO cd=null;
+     static int TIME_OUT_VALUE = 2000;
     
-    public DealModuleb412Test() {
+    public DealDeliveryTest() {
     }
     
     @BeforeClass
     public static void setUpClass() {
-        deal=ExcelFileUtil.getDealData();
+        cd=ExcelFileUtil.getDealData();
     }
     
     @AfterClass
@@ -38,7 +39,8 @@ public class DealModuleb412Test {
     @Before
     public void setUp() {
         WebDriverManager.chromedriver().setup();
-         driver = new ChromeDriver();
+        driver=new ChromeDriver();
+        driver.manage().window().maximize();
     }
     
     @After
@@ -46,53 +48,66 @@ public class DealModuleb412Test {
     }
 
     @Test
-    public void testDealDataDriven() throws InterruptedException{
+    public void testDeliveryDeal() throws InterruptedException{
         driver.get("http://www.pizzahut.com");
-             Thread.sleep(7000);
+           Thread.sleep(7000);
         driver.findElement(By.id("lg-nav-deals")).click();
         Thread.sleep(7000);
         driver.findElement(By.id("productATO0")).click();
         Thread.sleep(5000);
-        driver.findElement(By.id("find-occasion-carryout")).click();
-        Thread.sleep(3000);
-        driver.findElement(By.id("zip-input")).sendKeys(String.valueOf(deal.getZipcode()));
-        Thread.sleep(3000);
+        driver.findElement(By.id("find-occasion-delivery")).click();
+        driver.findElement(By.id("syo-address1")).sendKeys(cd.getAddress1());
+        driver.findElement(By.id("address2")).sendKeys(cd.getAddress2());
+        driver.findElement(By.id("city")).sendKeys(cd.getCity());
+        driver.findElement(By.id("state")).sendKeys(cd.getState());
+        driver.findElement(By.id("zip-input")).sendKeys(String.valueOf(cd.getZipcode()));
         driver.findElement(By.id("ph-find-store")).click();
-        Thread.sleep(3000);
-        
+        Thread.sleep(TIME_OUT_VALUE);
         driver.findElement(By.xpath("//a[@class='btn ph-ordernow ng-scope btn-primary']")).click();
-        Thread.sleep(5000);
+        Thread.sleep(TIME_OUT_VALUE);
         driver.findElement(By.id("modal-button-OK")).click();
-        Thread.sleep(3000);
+         Thread.sleep(TIME_OUT_VALUE);
+         driver.findElement(By.id("modal-button-Ok")).click();
+         Thread.sleep(TIME_OUT_VALUE);
+         driver.findElement(By.id("ato-large-original-stuffed-crust-pizza--up-to-3-toppings-and-8-breaded-boneout-wings")).click();
+         Thread.sleep(TIME_OUT_VALUE);
         driver.findElement(By.xpath("//span[contains(text(),'TOPPINGS')]")).click();
-        Thread.sleep(3000);
+        Thread.sleep(TIME_OUT_VALUE);
         driver.findElement(By.xpath("//span[contains(text(),'Veggies')]")).click();
-        Thread.sleep(3000);
+        Thread.sleep(TIME_OUT_VALUE);
         driver.findElement(By.xpath("//div[@id='option-2-M-V']//div[@class='clearfix pb-opleft crust-pb-topping-select pb-opleft-toppings']")).click();
-        Thread.sleep(3000);
+        Thread.sleep(TIME_OUT_VALUE);
 
         driver.findElement(By.xpath("//a[@id='modifier-M-M-R']//span[@class='pb-modifier-font ng-binding ng-scope'][contains(text(),'Regular')]")).click();
-        Thread.sleep(3000);
+        Thread.sleep(TIME_OUT_VALUE);
         driver.findElement(By.xpath("//span[contains(text(),'Roasted Spinach')]")).click();
-        Thread.sleep(3000);
+        Thread.sleep(TIME_OUT_VALUE);
         driver.findElement(By.id("pb-primary-cta-deal")).click();
-        Thread.sleep(3000);
+        Thread.sleep(TIME_OUT_VALUE);
         driver.findElement(By.xpath("//a[@class='btn btn-primary btn-block text-transform-none ng-binding']")).click();
-        Thread.sleep(3000);
-        driver.findElement(By.id("cart-quantity-icon")).click();
-        Thread.sleep(3000);
+        Thread.sleep(TIME_OUT_VALUE);
+        driver.findElement(By.id("prod-breaded-boneout-wings")).click();
+        Thread.sleep(TIME_OUT_VALUE);
+        System.out.println("**** Data: "+driver.findElement(By.id("prod-breaded-boneout-wings")));
+        driver.findElement(By.xpath("//option[contains(text(),'Honey BBQ')]")).click();
+        Thread.sleep(TIME_OUT_VALUE);
+        driver.findElement(By.id("ato-breaded-boneout-wings")).click();
+        Thread.sleep(TIME_OUT_VALUE);
+        driver.findElement(By.id("view-order-top-upsell")).click();
+         Thread.sleep(TIME_OUT_VALUE);
         driver.findElement(By.id("checkout-top-os")).click();
-        Thread.sleep(3000);
+        Thread.sleep(TIME_OUT_VALUE);
         driver.findElement(By.id("co-guest-login")).click();
-        driver.findElement(By.id("firstName")).sendKeys(deal.getFirstname());
+        Thread.sleep(TIME_OUT_VALUE);
+         driver.findElement(By.id("firstName")).sendKeys(cd.getFirstname());
         Thread.sleep(1000);
-        driver.findElement(By.id("lastName")).sendKeys(deal.getLastname());
+        driver.findElement(By.id("lastName")).sendKeys(cd.getLastname());
         Thread.sleep(1000);
-        driver.findElement(By.id("emailAddress")).sendKeys(deal.getEmailaddress());
+        driver.findElement(By.id("emailAddress")).sendKeys(cd.getEmailaddress());
         Thread.sleep(1000);
-        driver.findElement(By.id("phoneNumber")).sendKeys(String.valueOf(deal.getPhonenumber()));
+        driver.findElement(By.id("phoneNumber")).sendKeys(String.valueOf(cd.getPhonenumber()));
         Thread.sleep(1000);
-        driver.findElement(By.id("phoneExtension")).sendKeys(String.valueOf(deal.getExtension()));
+        driver.findElement(By.id("phoneExtension")).sendKeys(String.valueOf(cd.getExtension()));
         Thread.sleep(1000);
         driver.findElement(By.id("checkoutSelectedDate")).click();
         Thread.sleep(1000);
@@ -119,5 +134,8 @@ public class DealModuleb412Test {
 
         
         driver.findElement(By.id("ph-co-2-continue")).click();
+    
+
+
     }
 }
