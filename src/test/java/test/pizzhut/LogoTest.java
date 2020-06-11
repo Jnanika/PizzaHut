@@ -62,7 +62,7 @@ public class LogoTest {
         assertTrue("Pizza Hut logo", logoPresent);
         
         
-        System.out.println("logo is prsent");
+        System.out.println("logo is present");
         
         
         
