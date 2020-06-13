@@ -5,6 +5,7 @@
  */
 package test.pizzhut;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import java.util.concurrent.TimeUnit;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -12,20 +13,19 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 /**
  *
  * @author virad
  */
-public class TitleTest {
+public class EdgeDriverTest {
 
     WebDriver driver;
 
-    public TitleTest() {
+    public EdgeDriverTest() {
     }
 
     @BeforeClass
@@ -38,11 +38,14 @@ public class TitleTest {
 
     @Before
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "C:\\QA\\drivers\\chromedriver.exe");
-        driver = new ChromeDriver();
+
+        System.setProperty("webdriver.gecko.driver", "C:\\QA\\drivers\\geckodriver.exe");
+        //WebDriverManager.driver().setup();
+        driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         driver.manage().window().maximize();
+
     }
 
     @After
@@ -50,19 +53,11 @@ public class TitleTest {
         driver.quit();
     }
 
+    // TODO add test methods here.
+    // The methods must be annotated with annotation @Test. For example:
+    //
     @Test
-    public void VerifyTitleTest() {
-        driver.get("https://www.pizzahut.com/index.php#/home:");
-    try{
-        String actualTitle = driver.getTitle();
-        System.out.println(actualTitle);
-        assertEquals("Pizza Hut: Pizza Delivery | Pizza Carryout | Coupons | Wings & More",
-        driver.getTitle());
-        System.out.println("Test pass Title match");
-    }catch(Exception e){
-        System.out.println("Test Failed Title does not match");
-    }
-       
-
+    public void testEdgeBrowser() {
+        driver.get("https://www.pizzahut.com/index.php#/home");
     }
 }

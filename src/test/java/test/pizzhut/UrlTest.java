@@ -8,12 +8,11 @@ package test.pizzhut;
 import java.util.concurrent.TimeUnit;
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -21,21 +20,20 @@ import org.openqa.selenium.chrome.ChromeDriver;
  *
  * @author virad
  */
-public class TitleTest {
-
+public class UrlTest {
     WebDriver driver;
-
-    public TitleTest() {
+    
+    public UrlTest() {
     }
-
+    
     @BeforeClass
     public static void setUpClass() {
     }
-
+    
     @AfterClass
     public static void tearDownClass() {
     }
-
+    
     @Before
     public void setUp() {
         System.setProperty("webdriver.chrome.driver", "C:\\QA\\drivers\\chromedriver.exe");
@@ -44,25 +42,24 @@ public class TitleTest {
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         driver.manage().window().maximize();
     }
-
+    
     @After
     public void tearDown() {
         driver.quit();
     }
 
-    @Test
-    public void VerifyTitleTest() {
-        driver.get("https://www.pizzahut.com/index.php#/home:");
-    try{
-        String actualTitle = driver.getTitle();
-        System.out.println(actualTitle);
-        assertEquals("Pizza Hut: Pizza Delivery | Pizza Carryout | Coupons | Wings & More",
-        driver.getTitle());
-        System.out.println("Test pass Title match");
-    }catch(Exception e){
-        System.out.println("Test Failed Title does not match");
-    }
-       
-
-    }
+    // TODO add test methods here.
+    // The methods must be annotated with annotation @Test. For example:
+    //
+     @Test
+     public void assertUrlTest() {
+         driver.get("https://www.pizzahut.com/");
+         
+           String actualURL = driver.getCurrentUrl();
+        System.out.println(actualURL);
+        
+        Assert.assertEquals("https://www.pizzahut.com/",actualURL);
+        System.out.println("Test Passed");
+     
+     }
 }
